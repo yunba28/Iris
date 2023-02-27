@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{28ff9721-f2a9-4080-844b-ba2ecd22c90d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{8f8f2a74-40ce-4580-b62d-ec739faa8561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\include">
+      <UniqueIdentifier>{3481679a-6531-47b0-9886-0359c454f073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\src">
+      <UniqueIdentifier>{f185db2b-12b2-428a-a2c4-f5ce0720d1fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\include\Iris">
+      <UniqueIdentifier>{54badda5-ce95-4658-8b84-233b213a4b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\src\Iris">
+      <UniqueIdentifier>{1d516e59-8dfa-4056-ab79-a28df27ab424}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\include">
+      <UniqueIdentifier>{639172e0-618e-4d8b-9fe0-c22c4c774f87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\src">
+      <UniqueIdentifier>{b97ffc10-c0a6-40cf-bb44-11a2606698de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\include\Iris\Container">
+      <UniqueIdentifier>{fd03e63d-586c-4d62-a2d9-64a1ff2fede1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\include\Iris\Math">
+      <UniqueIdentifier>{b170af99-be66-44bc-bccd-62a389a68b41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\include\Iris\Common">
+      <UniqueIdentifier>{844ed756-f282-4223-91fd-88546f310e52}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Iris.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\include\IObject.hpp">
+      <Filter>Framework\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\include\Actor.hpp">
+      <Filter>Framework\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\include\Component.hpp">
+      <Filter>Framework\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Container\Array.hpp">
+      <Filter>Libraries\include\Iris\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Container\HashMap.hpp">
+      <Filter>Libraries\include\Iris\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Container\SortedMap.hpp">
+      <Filter>Libraries\include\Iris\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Container\String.hpp">
+      <Filter>Libraries\include\Iris\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Math\Math.hpp">
+      <Filter>Libraries\include\Iris\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Math\Vector2.hpp">
+      <Filter>Libraries\include\Iris\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Math\Vector3.hpp">
+      <Filter>Libraries\include\Iris\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Common\Concepts.hpp">
+      <Filter>Libraries\include\Iris\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Common\Exceptions.hpp">
+      <Filter>Libraries\include\Iris\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Common\Numeric.hpp">
+      <Filter>Libraries\include\Iris\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Common\SmartPtr.hpp">
+      <Filter>Libraries\include\Iris\Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Iris.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\src\Actor.cpp">
+      <Filter>Framework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\src\Component.cpp">
+      <Filter>Framework\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Iris.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Iris.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
