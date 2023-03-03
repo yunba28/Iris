@@ -46,6 +46,15 @@
     <Filter Include="Libraries\include\Iris\Common">
       <UniqueIdentifier>{844ed756-f282-4223-91fd-88546f310e52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Libraries\src\Iris\Math">
+      <UniqueIdentifier>{0328c15b-9430-4b18-8699-a8cd3403bace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\include\DirectX11">
+      <UniqueIdentifier>{b72c6cd6-2cd6-456e-a8e9-c73dfb15570f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\src\DirectX11">
+      <UniqueIdentifier>{79b2d4a3-bf06-4f97-9c64-afcaed03fcf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -102,6 +111,18 @@
     <ClInclude Include="Libraries\include\Iris\Common\SmartPtr.hpp">
       <Filter>Libraries\include\Iris\Common</Filter>
     </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Math\Quaternion.hpp">
+      <Filter>Libraries\include\Iris\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Math\Matrix4x4.hpp">
+      <Filter>Libraries\include\Iris\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\include\DirectX11\DirectX11.hpp">
+      <Filter>Framework\include\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\include\Iris\Common\Singleton.hpp">
+      <Filter>Libraries\include\Iris\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Iris.cpp">
@@ -112,6 +133,21 @@
     </ClCompile>
     <ClCompile Include="Framework\src\Component.cpp">
       <Filter>Framework\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\src\Iris\Math\Vector3.cpp">
+      <Filter>Libraries\src\Iris\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\src\Iris\Math\Quaternion.cpp">
+      <Filter>Libraries\src\Iris\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\src\Iris\Math\Vector2.cpp">
+      <Filter>Libraries\src\Iris\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\src\Iris\Math\Matrix4x4.cpp">
+      <Filter>Libraries\src\Iris\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\src\DirectX11\DirectX11.cpp">
+      <Filter>Framework\src\DirectX11</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

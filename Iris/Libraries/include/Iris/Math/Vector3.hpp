@@ -4,10 +4,12 @@
 
 namespace Iris
 {
+	struct Quaternion;
+	struct Matrix4x4;
+
 	struct Vector3 final
 	{
 		using value_type = float32;
-		using primitive_type = typename value_type::value_type;
 
 		constexpr Vector3()noexcept;
 
@@ -48,13 +50,15 @@ namespace Iris
 
 		Vector3 normalize()const noexcept;
 
+		Vector3 normalize(float32 _threshold)const noexcept;
+
+		Vector3 rotate(const Quaternion& _quaternion)const noexcept;
+
 		Vector3 project(const Vector3& _other)const noexcept;
 
 		Vector3 reflect(const Vector3& _normal)const noexcept;
 
-		constexpr Vector3 lerp(const Vector3& _destination, float32 _progress)const noexcept;
-
-		Vector3 slerp(const Vector3& _destination, float32 _progress)const;
+		Vector3 transform(const Matrix4x4& _matrix)const;
 
 		constexpr bool isZero()const noexcept;
 
@@ -79,6 +83,10 @@ namespace Iris
 		template<Concept::Arithmetic X, Concept::Arithmetic Y, Concept::Arithmetic Z>
 		static Vector3 MakeUnit(X _x, Y _y, Z _z);
 
+		static constexpr Vector3 Lerp(const Vector3& from, const Vector3& to, float32 t)noexcept;
+
+		static Vector3 Slerp(const Vector3& from, const Vector3& to, float32 t);
+
 		union
 		{
 			struct
@@ -86,7 +94,7 @@ namespace Iris
 				value_type x, y, z;
 			};
 
-			primitive_type data[3];
+			value_type data[3];
 		};
 	};
 }
@@ -313,7 +321,17 @@ namespace Iris
 	{
 		const auto myLength = length();
 
-		if (myLength < 1.f)
+		if (myLength < Math::Epsilon)
+			return *this;
+
+		return (*this) / myLength;
+	}
+
+	inline Vector3 Vector3::normalize(float32 _threshold) const noexcept
+	{
+		const auto myLength = length();
+
+		if (myLength < _threshold)
 			return *this;
 
 		return (*this) / myLength;
@@ -333,43 +351,6 @@ namespace Iris
 		const auto a = v.inverse().dot(_normal);
 		const auto reflected = v + (_normal * (a * 2));
 		return reflected;
-	}
-
-	inline constexpr Vector3 Vector3::lerp(const Vector3& _destination, float32 _progress) const noexcept
-	{
-		return (*this) + ((_destination - (*this)) * _progress);
-	}
-
-	inline Vector3 Vector3::slerp(const Vector3& _destination, float32 _progress) const
-	{
-		auto v1 = this->normalize();
-		auto v2 = _destination.normalize();
-
-		auto dotProduct = v1.dot(v2);
-
-		if (dotProduct < 0.f)
-		{
-			v2 = v2.inverse();
-			dotProduct = -dotProduct;
-		}
-
-		const auto DotThreshold = 0.99995_f32;
-
-		if (dotProduct > DotThreshold)
-		{
-			return lerp(_destination, _progress);
-		}
-
-		const auto theta = Math::ArcCos(dotProduct) * _progress;
-
-		const auto relativeVec = (v2 - (v1 * dotProduct)).normalize();
-
-		const auto len1 = this->length();
-		const auto len2 = _destination.length();
-
-		const auto newLength = len1 + (len2 - len1) * _progress;
-
-		return (v1 * Math::Cos(theta) + relativeVec * Math::Sin(theta)) * newLength;
 	}
 
 	inline constexpr bool Vector3::isZero() const noexcept
@@ -428,4 +409,8 @@ namespace Iris
 		return Vector3{ _x,_y,_z }.normalize();
 	}
 
+	inline constexpr Vector3 Vector3::Lerp(const Vector3& from, const Vector3& to, float32 t)noexcept
+	{
+		return from + ((to - from) * t);
+	}
 }

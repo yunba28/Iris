@@ -138,17 +138,21 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Framework\include\Actor.hpp" />
     <ClInclude Include="Framework\include\Component.hpp" />
+    <ClInclude Include="Framework\include\DirectX11\DirectX11.hpp" />
     <ClInclude Include="Framework\include\IObject.hpp" />
     <ClInclude Include="Iris.h" />
     <ClInclude Include="Libraries\include\Iris\Common\Concepts.hpp" />
     <ClInclude Include="Libraries\include\Iris\Common\Exceptions.hpp" />
     <ClInclude Include="Libraries\include\Iris\Common\Numeric.hpp" />
+    <ClInclude Include="Libraries\include\Iris\Common\Singleton.hpp" />
     <ClInclude Include="Libraries\include\Iris\Common\SmartPtr.hpp" />
     <ClInclude Include="Libraries\include\Iris\Container\Array.hpp" />
     <ClInclude Include="Libraries\include\Iris\Container\HashMap.hpp" />
     <ClInclude Include="Libraries\include\Iris\Container\SortedMap.hpp" />
     <ClInclude Include="Libraries\include\Iris\Container\String.hpp" />
+    <ClInclude Include="Libraries\include\Iris\Math\Matrix4x4.hpp" />
     <ClInclude Include="Libraries\include\Iris\Math\Math.hpp" />
+    <ClInclude Include="Libraries\include\Iris\Math\Quaternion.hpp" />
     <ClInclude Include="Libraries\include\Iris\Math\Vector2.hpp" />
     <ClInclude Include="Libraries\include\Iris\Math\Vector3.hpp" />
     <ClInclude Include="Resource.h" />
@@ -157,7 +161,12 @@
   <ItemGroup>
     <ClCompile Include="Framework\src\Actor.cpp" />
     <ClCompile Include="Framework\src\Component.cpp" />
+    <ClCompile Include="Framework\src\DirectX11\DirectX11.cpp" />
     <ClCompile Include="Iris.cpp" />
+    <ClCompile Include="Libraries\src\Iris\Math\Matrix4x4.cpp" />
+    <ClCompile Include="Libraries\src\Iris\Math\Quaternion.cpp" />
+    <ClCompile Include="Libraries\src\Iris\Math\Vector2.cpp" />
+    <ClCompile Include="Libraries\src\Iris\Math\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Iris.rc" />

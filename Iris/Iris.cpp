@@ -7,8 +7,7 @@
 #include <cstdio>
 #include <iostream>
 
-#include <Iris/Container/Array.hpp>
-#include <Iris/Container/String.hpp>
+#include <DirectX11/DirectX11.hpp>
 
 #define MAX_LOADSTRING 100
 
@@ -48,14 +47,34 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-    // メイン メッセージ ループ:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    // ゲームループ
+    while (1)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            //============================================
+            // ウィンドウメッセージ処理
+            //============================================
+            // 終了メッセージがきた
+            if (msg.message == WM_QUIT) {
+                break;
+            }
+            else
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
         }
+
+        //============================================
+        // ゲームの処理を書く
+        //============================================
+
+        Iris::float32 color[4] = { 0.2f, 0.2f, 1.0f, 1.0f };
+
+        IRIS_ENGINE(DirectX11).clearRenderTargetView(color);
+
+        IRIS_ENGINE(DirectX11).draw();
     }
 
     return (int) msg.wParam;
@@ -109,6 +128,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    if (!hWnd)
    {
       return FALSE;
+   }
+
+   if (!IRIS_ENGINE(DirectX11).createWindow(hWnd, 1280, 720))
+   {
+       return FALSE;
    }
 
    ShowWindow(hWnd, nCmdShow);

@@ -7,7 +7,6 @@ namespace Iris
 	struct Vector2 final
 	{
 		using value_type = float32;
-		using primitive_type = typename value_type::value_type;
 
 		constexpr Vector2()noexcept;
 
@@ -50,15 +49,13 @@ namespace Iris
 
 		Vector2 normalize()const noexcept;
 
+		Vector2 normalize(float32 _threshold)const noexcept;
+
 		Vector2 rotate(float32 _radian)const noexcept;
 
 		Vector2 project(const Vector2& _other)const noexcept;
 
 		Vector2 reflect(const Vector2& _normal)const noexcept;
-
-		constexpr Vector2 lerp(const Vector2& _destination, float32 _progress)const noexcept;
-
-		Vector2 slerp(const Vector2& _destination, float32 _progress)const noexcept;
 
 		constexpr bool isZero()const noexcept;
 
@@ -81,6 +78,10 @@ namespace Iris
 
 		static Vector2 FromAngle(float32 _radian)noexcept;
 
+		static constexpr Vector2 Lerp(const Vector2& from, const Vector2& to, float32 t)noexcept;
+
+		static Vector2 Slerp(const Vector2& from, const Vector2& to, float32 t);
+
 		union
 		{
 			struct
@@ -88,7 +89,7 @@ namespace Iris
 				value_type x, y;
 			};
 
-			primitive_type data[2];
+			value_type data[2];
 		};
 
 	};
@@ -313,7 +314,17 @@ namespace Iris
 	{
 		const auto myLength = length();
 
-		if (myLength < 1.f)
+		if (myLength < Math::Epsilon)
+			return *this;
+
+		return (*this) / myLength;
+	}
+
+	inline Vector2 Vector2::normalize(float32 _threshold) const noexcept
+	{
+		const auto myLength = length();
+
+		if (myLength < _threshold)
 			return *this;
 
 		return (*this) / myLength;
@@ -345,43 +356,6 @@ namespace Iris
 		const auto a = v.inverse().dot(_normal);
 		const auto reflected = v + (_normal * (a * 2));
 		return reflected;
-	}
-
-	inline constexpr Vector2 Vector2::lerp(const Vector2& _destination, float32 _progress) const noexcept
-	{
-		return (*this) + ((_destination - (*this)) * _progress);
-	}
-
-	inline Vector2 Vector2::slerp(const Vector2& _destination, float32 _progress) const noexcept
-	{
-		auto v1 = this->normalize();
-		auto v2 = _destination.normalize();
-
-		auto dotProduct = v1.dot(v2);
-
-		if (dotProduct < 0.f)
-		{
-			v2 = v2.inverse();
-			dotProduct = -dotProduct;
-		}
-
-		const auto DotThreshold = 0.99995_f32;
-
-		if (dotProduct > DotThreshold)
-		{
-			return lerp(_destination, _progress);
-		}
-
-		const auto theta = Math::ArcCos(dotProduct) * _progress;
-
-		const auto relativeVec = (v2 - (v1 * dotProduct)).normalize();
-
-		const auto len1 = this->length();
-		const auto len2 = _destination.length();
-
-		const auto newLength = len1 + (len2 - len1) * _progress;
-
-		return (v1 * Math::Cos(theta) + relativeVec * Math::Sin(theta)) * newLength;
 	}
 
 	inline constexpr bool Vector2::isZero() const noexcept
@@ -433,5 +407,10 @@ namespace Iris
 	inline Vector2 Vector2::FromAngle(float32 _radian) noexcept
 	{
 		return Vector2::Right().rotate(_radian);
+	}
+
+	inline constexpr Vector2 Vector2::Lerp(const Vector2& from, const Vector2& to, float32 t) noexcept
+	{
+		return from + ((to - from) * t);
 	}
 }

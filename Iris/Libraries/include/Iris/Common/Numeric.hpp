@@ -6,6 +6,16 @@
 #include <Iris/Common/Concepts.hpp>
 #include <Iris/Common/Exceptions.hpp>
 
+// ê¢äEàÍäQà´Ç≈ÉSÉ~Ç…Ç‡óÚÇÈÉJÉXÉ}ÉNÉçÇè¡Ç∑
+#ifdef min
+#undef min
+#endif
+
+// ê¢äEàÍäQà´Ç≈ÉSÉ~Ç…Ç‡óÚÇÈÉJÉXÉ}ÉNÉçÇè¡Ç∑
+#ifdef max
+#undef max
+#endif
+
 namespace Iris
 {
 	template <Concept::Arithmetic T>
@@ -730,179 +740,42 @@ namespace Iris
 
 namespace Iris
 {
-	using int8  = Numeric<std::int8_t>;
-	using int16 = Numeric<std::int16_t>;
-	using int32 = Numeric<std::int32_t>;
-	using int64 = Numeric<std::int64_t>;
+	using int8  = std::int8_t;
+	using int16 = std::int16_t;
+	using int32 = std::int32_t;
+	using int64 = std::int64_t;
 
-	using uint8  = Numeric<std::uint8_t>;
-	using uint16 = Numeric<std::uint16_t>;
-	using uint32 = Numeric<std::uint32_t>;
-	using uint64 = Numeric<std::uint64_t>;
+	using uint8  = std::uint8_t;
+	using uint16 = std::uint16_t;
+	using uint32 = std::uint32_t;
+	using uint64 = std::uint64_t;
 
-	using float32 = Numeric<float>;
-	using float64 = Numeric<double>;
-
-	namespace NumericLiterals
-	{
-		inline constexpr int8 operator"" _i8(size_t n) noexcept
-		{
-			return int8{ n };
-		}
-
-		inline constexpr int8 operator"" _i16(size_t n) noexcept
-		{
-			return int16{ n };
-		}
-
-		inline constexpr int8 operator"" _i32(size_t n) noexcept
-		{
-			return int32{ n };
-		}
-
-		inline constexpr int8 operator"" _i64(size_t n) noexcept
-		{
-			return int64{ n };
-		}
-
-		inline constexpr uint8 operator"" _ui8(size_t n) noexcept
-		{
-			return uint8{ n };
-		}
-
-		inline constexpr uint8 operator"" _ui16(size_t n) noexcept
-		{
-			return uint16{ n };
-		}
-
-		inline constexpr uint8 operator"" _ui32(size_t n) noexcept
-		{
-			return uint32{ n };
-		}
-
-		inline constexpr uint8 operator"" _ui64(size_t n) noexcept
-		{
-			return uint64{ n };
-		}
-
-		inline constexpr float32 operator"" _f32(size_t n) noexcept
-		{
-			return float32{ n };
-		}
-
-		inline constexpr float32 operator"" _f32(long double n) noexcept
-		{
-			return float32{ n };
-		}
-
-		inline constexpr float32 operator"" _f64(size_t n) noexcept
-		{
-			return float64{ n };
-		}
-
-		inline constexpr float32 operator"" _f64(long double n) noexcept
-		{
-			return float64{ n };
-		}
-	}
+	using float32 = float;
+	using float64 = double;
 }
-
-using namespace Iris::NumericLiterals;
 
 namespace Iris
 {
 	template<class T>
-	inline constexpr Numeric<T> Max(T a, T b) noexcept
+	inline constexpr T Max(T a, T b) noexcept
 	{
 		return a > b ? a : b;
 	}
 
 	template<class T>
-	inline constexpr Numeric<T> Max(Numeric<T> a, T b) noexcept
-	{
-		return a > b ? a : b;
-	}
-
-	template<class T>
-	inline constexpr Numeric<T> Max(T a, Numeric<T> b) noexcept
-	{
-		return b < a ? b : a;
-	}
-
-	template<class T>
-	inline constexpr Numeric<T> Max(Numeric<T> a, Numeric<T> b) noexcept
-	{
-		return a > b ? a : b;
-	}
-
-	template<class T>
-	inline constexpr Numeric<T> Min(T a, T b) noexcept
+	inline constexpr T Min(T a, T b) noexcept
 	{
 		return a < b ? a : b;
 	}
 
 	template<class T>
-	inline constexpr Numeric<T> Min(Numeric<T> a, T b) noexcept
-	{
-		return a < b ? a : b;
-	}
-
-	template<class T>
-	inline constexpr Numeric<T> Min(T a, Numeric<T> b) noexcept
-	{
-		return b > a ? b : a;
-	}
-
-	template<class T>
-	inline constexpr Numeric<T> Min(Numeric<T> a, Numeric<T> b) noexcept
-	{
-		return a < b ? a : b;
-	}
-
-	template<class T>
-	inline constexpr Numeric<T> Clamp(T value, T min, T max) noexcept
-	{
-		return (value < min) ? min : (max < value) ? max : value;
-	}
-
-	template<class T>
-	inline constexpr Numeric<T> Clamp(Numeric<T> value, T min, T max) noexcept
-	{
-		return (value < min) ? min : (max < value) ? max : value;
-	}
-
-	template<class T>
-	inline constexpr Numeric<T> Clamp(T value, Numeric<T> min, Numeric<T> max) noexcept
-	{
-		return (value < min) ? min : (max < value) ? max : value;
-	}
-
-	template<class T>
-	inline constexpr Numeric<T> Clamp(Numeric<T> value, Numeric<T> min, Numeric<T> max) noexcept
+	inline constexpr T Clamp(T value, T min, T max) noexcept
 	{
 		return (value < min) ? min : (max < value) ? max : value;
 	}
 
 	template<class T>
 	inline constexpr bool InRange(T value, T min, T max) noexcept
-	{
-		return min <= value && value <= max;
-	}
-
-	template<class T>
-	inline constexpr bool InRange(Numeric<T> value, T min, T max) noexcept
-	{
-		return min <= value && value <= max;
-	}
-
-	template<class T>
-	inline constexpr bool InRange(T value, Numeric<T> min, Numeric<T> max) noexcept
-	{
-		return min <= value && value <= max;
-	}
-
-	template<class T>
-	inline constexpr bool InRange(Numeric<T> value, Numeric<T> min, Numeric<T> max) noexcept
 	{
 		return min <= value && value <= max;
 	}

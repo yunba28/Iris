@@ -129,7 +129,7 @@ namespace Iris
 
 		void removeRange(const_iterator _first, const_iterator _last);
 
-		void removeAt(size_type _index, size_type _count = 0_ui64);
+		void removeAt(size_type _index, size_type _count = 0);
 
 		template<class Fty>
 		void removeBy(Fty _function)requires(Concept::Predicate<Fty, typename String::char_type>);
@@ -294,7 +294,7 @@ namespace Iris
 	{}
 
 	inline String::String(size_type _count, char_type _ch, const allocator_type& _alloc)
-		: mString(*_count, _ch, _alloc)
+		: mString(_count, _ch, _alloc)
 	{}
 
 	inline String::String(raw_type _raw, const allocator_type& _alloc)
@@ -335,12 +335,12 @@ namespace Iris
 
 	inline typename String::reference String::operator[](size_type _idx) noexcept
 	{
-		return mString[*_idx];
+		return mString[_idx];
 	}
 
 	inline typename String::const_reference String::operator[](size_type _idx) const noexcept
 	{
-		return mString[*_idx];
+		return mString[_idx];
 	}
 
 	inline typename String::base_type& String::operator*() noexcept
@@ -409,7 +409,7 @@ namespace Iris
 	{
 		if (const auto idx = indexOf(_where);idx != String::npos)
 		{
-			mString.insert(*idx, _raw);
+			mString.insert(idx, _raw);
 		}
 	}
 
@@ -515,7 +515,7 @@ namespace Iris
 
 	inline void String::removeAt(size_type _index, size_type _count)
 	{
-		mString.erase(*_index, *_count);
+		mString.erase(_index, _count);
 	}
 
 	template<class Fty>
@@ -678,7 +678,7 @@ namespace Iris
 	inline typename String::iterator String::findAt(size_type _index)
 	{
 		if (_index < mString.size())
-			return mString.begin() + *_index;
+			return mString.begin() + _index;
 
 		return mString.end();
 	}
@@ -686,7 +686,7 @@ namespace Iris
 	inline typename String::const_iterator String::findAt(size_type _index) const
 	{
 		if (_index < mString.size())
-			return mString.cbegin() + *_index;
+			return mString.cbegin() + _index;
 
 		return mString.cend();
 	}
@@ -721,12 +721,12 @@ namespace Iris
 
 	inline typename String::reference String::at(size_type _idx)
 	{
-		return mString.at(*_idx);
+		return mString.at(_idx);
 	}
 
 	inline typename String::const_reference String::at(size_type _idx) const
 	{
-		return mString.at(*_idx);
+		return mString.at(_idx);
 	}
 
 	inline typename String::reference String::first() noexcept
@@ -776,17 +776,17 @@ namespace Iris
 
 	inline void String::resize(size_type _count)
 	{
-		mString.resize(*_count);
+		mString.resize(_count);
 	}
 
 	inline void String::resize(size_type _count, char_type _ch)
 	{
-		mString.resize(*_count, _ch);
+		mString.resize(_count, _ch);
 	}
 
 	inline void String::reserve(size_type _capacity)
 	{
-		mString.reserve(*_capacity);
+		mString.reserve(_capacity);
 	}
 
 	inline void String::replace(char_type _old, char_type _new)
@@ -863,7 +863,7 @@ namespace Iris
 		{
 			if (_function(*it))
 			{
-				auto idx = *indexOf(it);
+				auto idx = indexOf(it);
 
 				it = mString.erase(it);
 
@@ -897,7 +897,7 @@ namespace Iris
 		{
 			if (_function(*it))
 			{
-				auto idx = *indexOf(it);
+				auto idx = indexOf(it);
 
 				it = mString.erase(it);
 

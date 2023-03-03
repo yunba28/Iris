@@ -21,8 +21,8 @@ namespace Iris
 		using const_pointer		= typename base_type::const_pointer;
 		using reference			= typename base_type::reference;
 		using const_reference	= typename base_type::const_reference;
-		using size_type			= uint64;
-		using difference_type	= uint64;
+		using size_type			= typename base_type::size_type;
+		using difference_type	= typename base_type::difference_type;
 
 		using iterator					= typename base_type::iterator;
 		using const_iterator			= typename base_type::const_iterator;
@@ -378,12 +378,12 @@ namespace Iris
 
 	template<class Type, class Allocator>
 	inline Array<Type, Allocator>::Array(size_type _count, const Allocator& _alloc)
-		: mArray(*_count, _alloc)
+		: mArray(_count, _alloc)
 	{}
 
 	template<class Type, class Allocator>
 	inline Array<Type, Allocator>::Array(size_type _count, const Type& _val, const Allocator& _alloc)
-		: mArray(*_count, _val, _alloc)
+		: mArray(_count, _val, _alloc)
 	{}
 
 	template<class Type, class Allocator>
@@ -405,13 +405,13 @@ namespace Iris
 	template<class Type, class Allocator>
 	inline typename Array<Type, Allocator>::reference Array<Type, Allocator>::operator[](size_type _idx) noexcept
 	{
-		return mArray[*_idx];
+		return mArray[_idx];
 	}
 
 	template<class Type, class Allocator>
 	inline typename Array<Type, Allocator>::const_reference Array<Type, Allocator>::operator[](size_type _idx) const noexcept
 	{
-		return mArray[*_idx];
+		return mArray[_idx];
 	}
 
 	template<class Type, class Allocator>
@@ -743,13 +743,13 @@ namespace Iris
 	template<class Type, class Allocator>
 	inline Type& Array<Type, Allocator>::at(size_type _index)
 	{
-		return mArray.at(*_index);
+		return mArray.at(_index);
 	}
 
 	template<class Type, class Allocator>
 	inline const Type& Array<Type, Allocator>::at(size_type _index) const
 	{
-		return mArray.at(*_index);
+		return mArray.at(_index);
 	}
 
 	template<class Type, class Allocator>
